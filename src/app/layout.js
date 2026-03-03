@@ -15,7 +15,11 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata = {
-  title: "Nitish Hansa | AI Developer & Software Engineer",
+  metadataBase: new URL('https://nitish-portfolio.vercel.app'),
+  title: {
+    default: "Nitish Hansa | AI Developer & Software Engineer",
+    template: "%s | Nitish Hansa",
+  },
   description:
     "Portfolio of Nitish Hansa — AI Developer, Software Engineer, and Creative Technologist building intelligent systems and elegant digital experiences.",
   keywords: [
@@ -26,6 +30,42 @@ export const metadata = {
     "Portfolio",
     "Creative Technologist",
   ],
+  authors: [{ name: "Nitish Hansa" }],
+  creator: "Nitish Hansa",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://nitish-portfolio.vercel.app",
+    title: "Nitish Hansa | AI Developer & Software Engineer",
+    description: "Portfolio of Nitish Hansa — AI Developer, Software Engineer, and Creative Technologist building intelligent systems and elegant digital experiences.",
+    siteName: "Nitish Hansa Portfolio",
+    images: [
+      {
+        url: "/og-image.jpg", // We will let them know they need to place an image here later
+        width: 1200,
+        height: 630,
+        alt: "Nitish Hansa - AI Developer & Software Engineer",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Nitish Hansa | AI Developer & Software Engineer",
+    description: "Portfolio of Nitish Hansa — AI Developer, Software Engineer, and Creative Technologist building intelligent systems and elegant digital experiences.",
+    images: ["/og-image.jpg"],
+    creator: "@nitishhansa",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
 };
 
 import SmoothScroll from "@/components/SmoothScroll";
