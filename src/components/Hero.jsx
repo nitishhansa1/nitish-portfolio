@@ -153,6 +153,7 @@ export default function Hero() {
                     <span style={{
                         fontSize: '0.6rem', color: 'var(--fg-secondary)',
                         letterSpacing: '0.3em', textTransform: 'uppercase', fontWeight: 500,
+                        marginRight: '-0.3em'
                     }}>
                         Scroll
                     </span>
