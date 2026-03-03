@@ -154,10 +154,10 @@ export default function Navbar() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -10 }}
                         transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                        className="md:hidden liquid-glass mx-4 sm:mx-6"
+                        className="md:hidden liquid-glass mx-6 sm:mx-10"
                         style={{ marginTop: 12, borderRadius: 20, overflow: 'hidden' }}
                     >
-                        <div className="flex flex-col gap-1 p-4">
+                        <div className="flex flex-col gap-2 py-6 px-4">
                             {navLinks.map((link, i) => (
                                 <motion.a
                                     key={link.name}
