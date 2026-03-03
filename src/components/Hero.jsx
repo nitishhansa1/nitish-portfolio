@@ -148,7 +148,7 @@ export default function Hero() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 1.8, duration: 1.2 }}
-                    className="absolute bottom-10 flex flex-col items-center gap-2"
+                    className="absolute bottom-4 pb-4 md:pb-0 md:bottom-10 flex flex-col items-center gap-2"
                 >
                     <span style={{
                         fontSize: '0.6rem', color: 'var(--fg-secondary)',
