@@ -28,6 +28,8 @@ export const metadata = {
   ],
 };
 
+import SmoothScroll from "@/components/SmoothScroll";
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
@@ -35,7 +37,9 @@ export default function RootLayout({ children }) {
         className={`${inter.variable} ${spaceGrotesk.variable} antialiased`}
         style={{ fontFamily: "var(--font-inter), 'Inter', sans-serif" }}
       >
-        {children}
+        <SmoothScroll>
+          {children}
+        </SmoothScroll>
       </body>
     </html>
   );
