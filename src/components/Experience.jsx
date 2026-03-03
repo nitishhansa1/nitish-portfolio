@@ -36,7 +36,7 @@ function TimelineItem({ exp, index, isLast }) {
     const isInView = useInView(ref, { once: true, margin: '-100px' });
 
     return (
-        <div ref={ref} style={{ position: 'relative', paddingLeft: 60, paddingBottom: isLast ? 0 : 60 }}>
+        <div ref={ref} className="pl-8 md:pl-[60px]" style={{ position: 'relative', paddingBottom: isLast ? 0 : 60 }}>
             {!isLast && (
                 <motion.div
                     initial={{ scaleY: 0 }}

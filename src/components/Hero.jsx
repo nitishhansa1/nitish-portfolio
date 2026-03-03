@@ -54,7 +54,7 @@ export default function Hero() {
             ref={sectionRef}
             id="hero"
             className="hero-section relative flex items-center justify-center overflow-hidden"
-            style={{ minHeight: '100vh' }}
+            style={{ minHeight: '100svh' }}
         >
             <div className="hero-bg-gradient" />
 

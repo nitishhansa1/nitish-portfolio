@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { HiExternalLink, HiCode } from 'react-icons/hi';
 import LiquidGlassCard from './LiquidGlassCard';
@@ -178,28 +178,38 @@ export default function Projects() {
     /* Vertical scroll → horizontal movement (smooth, reduced speed) */
     const scrollX = useTransform(scrollYProgress, [0, 1], ['5%', '-55%']);
 
+    // Check if we are on a mobile device to disable horizontal scroll
+    const [isMobile, setIsMobile] = useState(false);
+    useEffect(() => {
+        const checkMobile = () => setIsMobile(window.innerWidth < 768);
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
+
     return (
         <section
             ref={sectionRef}
             id="projects"
             style={{
                 position: 'relative',
-                /* Tall section to drive horizontal scroll */
-                height: '140vh',
+                /* Tall section to drive horizontal scroll on desktop, normal height on mobile */
+                height: isMobile ? 'auto' : '140vh',
             }}
         >
             <FloatingDepthLayer sectionId="projects" />
 
             {/* Sticky container that stays visible while scroll progresses */}
             <div style={{
-                position: 'sticky',
+                position: isMobile ? 'relative' : 'sticky',
                 top: 0,
-                height: '100vh',
+                height: isMobile ? 'auto' : '100vh',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'center',
                 overflow: 'hidden',
-                paddingTop: 'var(--section-gap)',
+                paddingTop: isMobile ? 0 : 'var(--section-gap)',
+                paddingBottom: isMobile ? 'var(--section-gap)' : 0,
             }}>
                 <div className="container-main">
                     <motion.div
@@ -215,15 +225,16 @@ export default function Projects() {
                     </motion.div>
                 </div>
 
-                {/* Horizontal scroll track */}
+                {/* Horizontal scroll track (or vertical stack on mobile) */}
                 <motion.div
                     style={{
                         display: 'flex',
-                        gap: '2rem',
-                        x: scrollX,
-                        paddingLeft: '48px',
-                        paddingRight: '20vw',
-                        willChange: 'transform',
+                        flexDirection: isMobile ? 'column' : 'row',
+                        gap: isMobile ? '2rem' : '2rem',
+                        x: isMobile ? 0 : scrollX,
+                        paddingLeft: isMobile ? '16px' : '48px',
+                        paddingRight: isMobile ? '16px' : '20vw',
+                        willChange: isMobile ? 'auto' : 'transform',
                         marginTop: '2rem',
                     }}
                 >
@@ -232,31 +243,33 @@ export default function Projects() {
                     ))}
                 </motion.div>
 
-                {/* Scroll progress indicator */}
-                <div style={{
-                    position: 'absolute', bottom: 40, left: '50%', transform: 'translateX(-50%)',
-                    display: 'flex', alignItems: 'center', gap: 12,
-                }}>
-                    <span style={{
-                        fontSize: '0.65rem', color: 'var(--fg-secondary)',
-                        letterSpacing: '0.2em', textTransform: 'uppercase', fontWeight: 500,
+                {/* Scroll progress indicator (hide on mobile since it is vertical) */}
+                {!isMobile && (
+                    <div style={{
+                        position: 'absolute', bottom: 40, left: '50%', transform: 'translateX(-50%)',
+                        display: 'flex', alignItems: 'center', gap: 12,
                     }}>
-                        Scroll to explore
-                    </span>
-                    <motion.div style={{
-                        width: 60, height: 2, borderRadius: 1,
-                        background: 'var(--liquid-border)', overflow: 'hidden',
-                    }}>
-                        <motion.div
-                            style={{
-                                height: '100%', borderRadius: 1,
-                                background: 'var(--accent)',
-                                scaleX: scrollYProgress,
-                                transformOrigin: 'left',
-                            }}
-                        />
-                    </motion.div>
-                </div>
+                        <span style={{
+                            fontSize: '0.65rem', color: 'var(--fg-secondary)',
+                            letterSpacing: '0.2em', textTransform: 'uppercase', fontWeight: 500,
+                        }}>
+                            Scroll to explore
+                        </span>
+                        <motion.div style={{
+                            width: 60, height: 2, borderRadius: 1,
+                            background: 'var(--liquid-border)', overflow: 'hidden',
+                        }}>
+                            <motion.div
+                                style={{
+                                    height: '100%', borderRadius: 1,
+                                    background: 'var(--accent)',
+                                    scaleX: scrollYProgress,
+                                    transformOrigin: 'left',
+                                }}
+                            />
+                        </motion.div>
+                    </div>
+                )}
             </div>
         </section>
     );

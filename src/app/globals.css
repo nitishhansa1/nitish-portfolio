@@ -851,18 +851,25 @@ section {
     padding: 1.2rem !important;
   }
 
+  /* Ensure cards never exceed screen width */
+  .container-main>* {
+    max-width: 100%;
+  }
+
   /* Hero buttons — stack or shrink */
   .hero-buttons {
     flex-direction: column !important;
     gap: 0.75rem !important;
     align-items: center;
+    width: 100%;
   }
 
   .hero-buttons a,
   .hero-buttons button {
     width: 100%;
-    max-width: 280px;
+    max-width: 100%;
     text-align: center;
+    justify-content: center;
   }
 
   /* Stat counters — single column on very small screens */
@@ -886,12 +893,23 @@ section {
   }
 
   /* Hide cursor glow on touch devices */
-  .cursor-glow-canvas {
+  .cursor-glow-canvas,
+  .cursor-glow {
     display: none !important;
   }
 
   /* Reduce noise grain opacity */
   .noise-grain {
     opacity: 0.02 !important;
+  }
+
+  /* Hide complex 3D backgrounds entirely on small mobile for battery/perf */
+  .floating-particles-canvas {
+    display: none !important;
+  }
+
+  /* Adjust section gap for mobile */
+  section {
+    padding: 3rem 0;
   }
 }
