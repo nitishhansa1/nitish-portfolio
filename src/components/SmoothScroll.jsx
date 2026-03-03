@@ -7,12 +7,16 @@ export default function SmoothScroll({ children }) {
         <ReactLenis
             root
             options={{
-                lerp: 0.08, // The lower the lerp, the smoother/slower the scroll
+                lerp: 0.1, // Fixed value for balanced scrolling, lower = smoother but can jitter if dropped frames occur
                 duration: 1.2,
+                orientation: 'vertical',
+                gestureOrientation: 'vertical',
                 smoothWheel: true,
-                wheelMultiplier: 1, // Determines scroll speed
-                touchMultiplier: 2, // Helps with touch devices
-                infinite: false,
+                smoothTouch: false,
+                wheelMultiplier: 1,
+                touchMultiplier: 2,
+                normalizeWheel: true,
+                syncTouch: true, // Crucial for Framer Motion sync
             }}
         >
             {children}
